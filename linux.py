@@ -53,7 +53,8 @@ def linux_flags(env):
         'CPPFLAGS' : '''
             -fPIC
             -g
-            -O2
+            -O3
+            -flto
             -Wall
             -Wextra
             -Werror
@@ -61,8 +62,11 @@ def linux_flags(env):
     }),
     env.MergeFlags({
         'LINKFLAGS' : '''
+            -flto
         '''.split()
     })
+    env['AR'] = 'gcc-ar'
+    env['RANLIB'] = 'gcc-ranlib'
 
 
 def linux_builders(env):
